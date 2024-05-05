@@ -36,6 +36,7 @@ final class CoreDataManager {
             news.title = $0.title
             news.urlSting = $0.url
             news.category = category
+            news.descriptionText = $0.description
         }
         viewContext.saveContext()
     }

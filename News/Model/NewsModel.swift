@@ -14,14 +14,18 @@ struct NewsResponse: Codable {
 struct NewsModel: Codable, Identifiable {
     let id: UUID = UUID()
     let title: String
+    let description: String?
+    let publishedAt: String
     let url: String?
     let urlToImage: String?
     let category: String?
 
     init(from object: News) {
         self.title = object.title ?? "No title"
+        self.description = object.descriptionText ?? "No description"
         self.url = object.urlSting
         self.urlToImage = object.urlImageString
         self.category = object.category
+        self.publishedAt = ""
     }
 }
