@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import struct Kingfisher.KFImage
 
 struct NewsView: View {
     @StateObject var viewModel = NewsViewModel()
@@ -111,11 +112,8 @@ private extension NewsView {
 
     func newsCell(for model: NewsModel) -> some View {
         ZStack {
-            ImageView(urlString: model.urlToImage ?? "") {
-                Color.gray
-                    .opacity(0.2)
-            }
-            .frame(width: 200, height: 300)
+            imageView(for: model.urlToImage ?? "")
+                .frame(width: 200, height: 300)
 
             VStack {
                 Spacer()
@@ -139,5 +137,15 @@ private extension NewsView {
         }
         .frame(width: 200, height: 300)
         .cornerRadius(20)
+    }
+
+    func imageView(for urlString: String) -> some View {
+        KFImage(URL(string: urlString))
+            .placeholder {
+                Color.gray
+                    .opacity(0.2)
+            }
+            .resizable()
+            .scaledToFill()
     }
 }
